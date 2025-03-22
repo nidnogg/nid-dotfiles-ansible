@@ -22,11 +22,10 @@ ansible-vault view "$VAULT_FILE" --vault-password-file="$VAULT_PASSWORD_FILE" |
   grep -v "^$" | # Skip empty lines
   grep ":" |     # Only lines with a colon
   while IFS=':' read -r key value; do
-    # Trim whitespace from key and value
+    # trim whitespace from key and value
     key=$(echo "$key" | xargs)
     value=$(echo "$value" | xargs | tr -d '"')
-    echo "key $key"
-    echo "value $value"
+
     # convert snake_case to SCREAMING_SNAKE_CASE
     env_key=$(echo "$key" | tr '[:lower:]' '[:upper:]')
     
