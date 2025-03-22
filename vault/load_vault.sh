@@ -1,5 +1,5 @@
 #!/bin/zsh
-echo "Loading ansible-vault secrets"
+echo "Loading ansible-vault secrets..." 
 VAULT_FILE="$HOME/localdev/nid-dotfiles-ansible/vault/nidbook.yml"
 VAULT_PASSWORD_FILE="$HOME/localdev/vault/ansible_vault.key"
 
@@ -25,7 +25,8 @@ ansible-vault view "$VAULT_FILE" --vault-password-file="$VAULT_PASSWORD_FILE" |
     # Trim whitespace from key and value
     key=$(echo "$key" | xargs)
     value=$(echo "$value" | xargs | tr -d '"')
-    
+    echo "key $key"
+    echo "value $value"
     # convert snake_case to SCREAMING_SNAKE_CASE
     env_key=$(echo "$key" | tr '[:lower:]' '[:upper:]')
     
@@ -34,4 +35,4 @@ ansible-vault view "$VAULT_FILE" --vault-password-file="$VAULT_PASSWORD_FILE" |
     echo "$env_key"
   done
 
-echo "All secrets loaded from vault successfully!"
+echo "...successfully loaded vault secrets."
